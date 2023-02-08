@@ -1,5 +1,6 @@
 syntax = "proto3";
 package proof;
+option go_package = './l2output';
 
 service Proof {
     rpc Prove (ProofRequest) returns (ProofResponse) {}
