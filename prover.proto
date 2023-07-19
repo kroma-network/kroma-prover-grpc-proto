@@ -1,0 +1,39 @@
+syntax = "proto3";
+package prover;
+
+option go_package = './prover';
+
+service Prover {
+  rpc Prove (ProveRequest) returns (ProveResponse);
+  rpc Spec (ProverSpecRequest) returns (ProverSpecResponse);
+}
+
+message ProveRequest {
+  string trace_string = 1;
+  ProofType proof_type = 2;
+}
+
+message ProveResponse {
+  bytes final_pair = 1;
+  bytes proof = 2;
+}
+
+enum ProofType {
+  NONE = 0;
+  EVM = 1;
+  STATE = 2;
+  SUPER = 3;
+  AGG = 4;
+}
+
+message ProverSpecRequest {
+}
+
+message ProverSpecResponse {
+  string proof_type_desc = 1;
+  uint32 degree = 2;
+  uint32 agg_degree = 3;
+  uint32 chain_id = 4;
+  uint32 max_txs = 5;
+  uint32 max_call_data = 6;
+}
